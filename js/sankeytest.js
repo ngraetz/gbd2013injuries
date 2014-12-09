@@ -64,11 +64,11 @@ var nodeTextFunc = function(node) {
 };
 
 draw = function(url) {
-	$.getJSON(url, function(rdp) {	
+	d3.json(url, function(rdp) {	
 	
 		var nodeMap = {};
-		graph.nodes.forEach(function(x) { nodeMap[x.name] = x; });
-		graph.links = graph.links.map(function(x) {
+		rdp.nodes.forEach(function(x) { nodeMap[x.name] = x; });
+		rdp.links = rdp.links.map(function(x) {
 		return {
 			source: nodeMap[x.source],
 			target: nodeMap[x.target],
