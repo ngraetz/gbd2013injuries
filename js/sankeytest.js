@@ -92,11 +92,11 @@ draw = function(url) {
 		
 		linkG.selectAll(".link").transition().duration(500).call(linkFunc);
 		
-		$('.link').poshytip({
-			className: 'tip-twitter',
-			followCursor: true,
-			slide: false
-		});
+		// $('.link').poshytip({
+			// className: 'tip-twitter',
+			// followCursor: true,
+			// slide: false
+		// });
 
 		// Build node bars
 		var nodeRects = nodeGRects.selectAll(".node")
