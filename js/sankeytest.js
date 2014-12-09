@@ -226,7 +226,7 @@ d3.json("/gbd2013injuries/data/ylds2013male.json", function(error, rdp) {
 		
 // add in the links
   var link = svg.append("g").selectAll(".link")
-      .data(graph.links)
+      .data(rdp.links)
 	  
 	link.enter().append("path").call(linkFunc)
 	
@@ -242,7 +242,7 @@ d3.json("/gbd2013injuries/data/ylds2013male.json", function(error, rdp) {
 
 // add in the nodes
   var nodeRects = svg.append("g").selectAll(".node")
-      .data(graph.nodes)
+      .data(rdp.nodes)
 	  
 	nodeRects.enter().append("rect").call(nodeRectFunc) 
 		
@@ -265,7 +265,7 @@ d3.json("/gbd2013injuries/data/ylds2013male.json", function(error, rdp) {
 
 // Build node titles
 		var nodeTitle = svg.append("g").selectAll("text")
-		  .data(graph.nodes, function(d) {return d.id})			
+		  .data(rdp.nodes, function(d) {return d.id})			
 		
 		nodeTitle.enter().append("text").call(nodeTextFunc);
 		
