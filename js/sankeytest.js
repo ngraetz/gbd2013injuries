@@ -169,8 +169,8 @@ var nodeTextFunc = function(node) {
 	  .attr("text-anchor", "start");
 };
 
-// draw = function(url) {
-d3.json("/gbd2013injuries/data/ylds2013male.json", function(error, rdp) {
+draw = function(url) {
+d3.json(url, function(error, rdp) {
 
     var nodeMap = {};
     rdp.nodes.forEach(function(x) { nodeMap[x.name] = x; });
@@ -274,7 +274,7 @@ d3.json("/gbd2013injuries/data/ylds2013male.json", function(error, rdp) {
 		svg.append("g").selectAll("text").transition().duration(500).call(nodeTextFunc);
 		
 	});
-// };
+};
 
 // Create axis titles
 d3.select("svg").append("text")
