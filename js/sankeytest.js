@@ -24,9 +24,9 @@ var nodeGTitle = svg.append("g");
 
 // Initialize sankey
 var sankey = d3.sankey()
-	.nodeWidth(25)
-	.nodePadding(10)
-	.size([width, height]);
+    .nodeWidth(60)
+    .nodePadding(0)
+    .size([width, height]);
 
 // Initialize path for sankey
 var path = sankey.link();
