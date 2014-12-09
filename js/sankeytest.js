@@ -64,7 +64,7 @@ var nodeTextFunc = function(node) {
 };
 
 // draw = function(url) {
-d3.json("/data/ylds2013male.json", function(error, rdp) {
+d3.json("/gbd2013injuries/data/ylds2013male.json", function(error, rdp) {
 
     var nodeMap = {};
     rdp.nodes.forEach(function(x) { nodeMap[x.name] = x; });
