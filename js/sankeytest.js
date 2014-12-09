@@ -66,16 +66,6 @@ var nodeTextFunc = function(node) {
 draw = function(url) {
 	$.getJSON(url, function(rdp) {	
 	
-		var nodeMap = {};
-		rdp.nodes.forEach(function(x) { nodeMap[x.name] = x; });
-		rdp.links = rdp.links.map(function(x) {
-		return {
-			source: nodeMap[x.source],
-			target: nodeMap[x.target],
-			value: x.value
-		};
-	});
-	
 		// Link sankey object with data
 		sankey
 		  .nodes(rdp.nodes)
