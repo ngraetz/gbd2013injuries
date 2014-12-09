@@ -63,8 +63,8 @@ var nodeTextFunc = function(node) {
 	  .attr("text-anchor", "start");
 };
 
-draw = function(url) {
-	d3.json(url, function(error, rdp) {	
+// draw = function(url) {
+	d3.json("data/ylds2013male.json", function(rdp) {	
 	
 		// Link sankey object with data
 		sankey
@@ -108,7 +108,7 @@ draw = function(url) {
 		
 		nodeGTitle.selectAll("text").transition().duration(500).call(nodeTextFunc);
 	});
-};
+// };
 
 // Create axis titles
 d3.select("svg").append("text")
