@@ -186,7 +186,7 @@ d3.json(url, function(error, rdp) {
 		  .nodes(rdp.nodes)
 		  .links(rdp.links)
 		  .layout(32);
-/*		
+		
 		// Build links between nodes (on linkG element)
 		var link = linkG.selectAll(".link")
 		  .data(rdp.links, function(d) {return d.id})  
@@ -222,8 +222,8 @@ d3.json(url, function(error, rdp) {
 		nodeTitle.exit().remove();	
 		
 		nodeGTitle.selectAll("text").transition().duration(500).call(nodeTextFunc);
-		*/
 		
+/*		
 // add in the links
   var link = svg.append("g").selectAll(".link")
       .data(rdp.links)
@@ -272,7 +272,7 @@ d3.json(url, function(error, rdp) {
 		nodeTitle.exit().remove();
 		
 		svg.append("g").selectAll("text").transition().duration(500).call(nodeTextFunc);
-		
+*/		
 	});
 };
 
