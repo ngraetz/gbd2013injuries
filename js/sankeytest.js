@@ -186,7 +186,7 @@ d3.json("/gbd2013injuries/data/ylds2013male.json", function(error, rdp) {
 		  .nodes(rdp.nodes)
 		  .links(rdp.links)
 		  .layout(32);
-		
+/*		
 		// Build links between nodes (on linkG element)
 		var link = linkG.selectAll(".link")
 		  .data(rdp.links, function(d) {return d.id})  
@@ -222,19 +222,70 @@ d3.json("/gbd2013injuries/data/ylds2013male.json", function(error, rdp) {
 		nodeTitle.exit().remove();	
 		
 		nodeGTitle.selectAll("text").transition().duration(500).call(nodeTextFunc);
+		*/
+		
+// add in the links
+  var link = svg.append("g").selectAll(".link")
+      .data(graph.links)
+	  
+	link.enter().append("path").call(linkFunc)
+	
+	link.exit().remove(); 
+		
+	svg.append("g").selectAll(".link").transition().duration(500).call(linkFunc);  
+	  
+// add the link titles
+  link.append("title")
+        .text(function(d) {
+    		return d.source.name + " : " + 
+                d.target.name + "\n" + format(d.value); });
+
+// add in the nodes
+  var nodeRects = svg.append("g").selectAll(".node")
+      .data(graph.nodes)
+	  
+	nodeRects.enter().append("rect").call(nodeRectFunc) 
+		
+	nodeRects.exit().remove();  	
+		
+	svg.append("g").selectAll(".node").transition().duration(500).call(nodeRectFunc);	  
+		  
+// add in the title for the nodes
+  nodeRects.append("text")
+      .attr("x", -6)
+      .attr("y", function(d) { return d.dy / 2; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", "end")
+      .attr("transform", null)
+      .text(function(d) { return d.name; })
+    .filter(function(d) { return d.x > width / 2; })
+      .attr("x", 6 + sankey.nodeWidth())
+      .attr("text-anchor", "start");
+
+
+// Build node titles
+		var nodeTitle = svg.append("g").selectAll("text")
+		  .data(graph.nodes, function(d) {return d.id})			
+		
+		nodeTitle.enter().append("text").call(nodeTextFunc);
+		
+		nodeTitle.exit().remove();
+		
+		svg.append("g").selectAll("text").transition().duration(500).call(nodeTextFunc);
+		
 	});
 // };
 
 // Create axis titles
 d3.select("svg").append("text")
-  .text("Garbage")
+  .text("E-Codes")
   .attr("x", function(d) { return margin.left + (sankey.nodeWidth()/2)})
   .attr("y", function(d) { return margin.top / 2; })
   .attr("text-anchor", "middle")
   .style("font-size", "24px" )
   
 d3.select("svg").append("text")
-  .text("Targets")
+  .text("N-Codes")
   .attr("x", function(d) { return width + margin.left - (sankey.nodeWidth()/2); })
   .attr("y", function(d) { return margin.top / 2; })
   .attr("text-anchor", "middle")
