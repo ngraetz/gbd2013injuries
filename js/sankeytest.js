@@ -31,6 +31,7 @@ var sankey = d3.sankey()
 // Initialize path for sankey
 var path = sankey.link();
 
+/*
 // Define funcitons
 var linkFunc = function(link) {
 	link
@@ -48,6 +49,66 @@ var nodeRectFunc = function(node) {
 	  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
 	  .attr("class", function(d) { return "node group"+d.color_class; })
 	  .attr("id", function(d) {return d.id})
+};
+
+var nodeTextFunc = function(node) {
+	node
+	  .attr("x", function(d) { return d.x + -6; })
+	  .attr("y", function(d) { return d.y + (d.dy / 2); })
+	  .attr("dy", ".35em")
+	  .attr("text-anchor", "end")
+	  .attr("transform", null)
+	  .text(function(d) { return d.name; })
+	.filter(function(d) { return d.x > width / 2; })
+	  .attr("x", function(d) {return 6 + sankey.nodeWidth() + d.x})
+	  .attr("text-anchor", "start");
+};
+*/
+
+// My functions (refer to Daniel's above to troubleshoot)
+var linkFunc = function(link) {
+	link
+	  .attr("class", function(d) { return "link group"+d.color_class; })
+	  .attr("id", function(d,i){
+        d.id = i;
+        return "link-"+i;
+		})
+	  .attr("d", path)
+	  .attr("title", function(d) { return d.source.name + " ? " + d.target.name + "<br/>" + format(d.value) + "<br/>" + d.pkg_pct + "% of package<br/>" + d.c_pct + "% of cause"; })
+	  .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+	  .sort(function(a, b) { return b.dy - a.dy; });
+}
+
+var nodeRectFunc = function(node) {
+	/*
+	node
+	  .attr("height", function(d) { return d.dy; })
+	  .attr("width", sankey.nodeWidth())
+	  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+	  .attr("class", function(d) { return "node group"+d.color_class; })
+	  .attr("id", function(d) {return d.id})
+	 */
+	node.attr("class", "node")
+    .attr("transform", function(d) { 
+		  return "translate(" + d.x + "," + d.y + ")"; })
+		/*  
+     .call(d3.behavior.drag()
+		.origin(function(d) { return d; })
+		.on("dragstart", function() { 
+		  this.parentNode.appendChild(this); })
+		.on("drag", dragmove))
+		*/	
+	.on("click", highlight_node_links)	
+    .attr("height", function(d) { return d.dy; })
+    .attr("width", sankey.nodeWidth())
+    .style("fill", function(d) { 
+		  return d.color = color(d.name.replace(/ .*/, "")); })
+    .style("stroke", function(d) { 
+		  return d3.rgb(d.color).darker(2); })
+    .append("title")
+    .text(function(d) { 
+		  return d.name + "\n" + format(d.value); }) 
+		  
 };
 
 var nodeTextFunc = function(node) {
