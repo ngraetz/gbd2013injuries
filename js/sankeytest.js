@@ -64,7 +64,7 @@ var nodeTextFunc = function(node) {
 };
 
 draw = function(url) {
-	$.getJSON(url, function(rdp) {	
+	d3.json(url, function(error, rdp) {	
 	
 		// Link sankey object with data
 		sankey
